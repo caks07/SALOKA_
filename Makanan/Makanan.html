@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="Style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header" data-header>
+      <div class="container">
+        <a href="#" class="logo">
+          <img
+            src="logo.png"
+            width="160"
+            height="50"
+            alt="Saloka - Kuliner Nusantara"
+          />
+        </a>
+
+        <nav class="navbar" data-navbar>
+          <button class="close-btn" aria-label="close menu" data-nav-taggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <a href="#" class="logo">
+            <img
+              src="logo.png"
+              width="160"
+              height="50"
+              alt="Saloka - Kuliner Nusantara"
+            />
+          </a>
+
+          <!-- bikin navigasi bar atas -->
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="../home/home.html" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Home</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="../Makanan/Makanan.html"
+                class="navbar-link hover-underline active"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Food</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="../Restorant/Restoran.html"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Resto</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#festival" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Festival</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#about" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">About us</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#profile" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Account</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- membuat button pemesanan meja -->
+        <a href="#table" class="btn btn-secondary">
+          <span class="text text-1">Find A Table</span>
+
+          <span class="text text-2" aria-hidden="true">Find A Table</span>
+        </a>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+        <div class="overlay" data-nav-toggler data-overlay></div>
+      </div>
+    </header>
+
+    <section class="section food-menu" id="food-menu">
+      <div class="container">
+        <p class="section-subtitle">KHAS LOKAL</p>
+
+        <h2 class="h2 section-title">
+          Makanan <span class="span">Daerah</span>
+        </h2>
+
+        <ul class="fiter-list">
+          <select name="orang" class="input-field">
+            <option value="6-person">SEMUA</option>
+            <option value="1-person">JOJGA</option>
+            <option value="2-person">JEPARA</option>
+            <option value="3-person">PURWODADI</option>
+            <option value="4-person">PAPUA/TIMIKA</option>
+            <option value="5-person">SUKABUMI</option>
+          </select>
+
+          <li>
+            <button class="filter-btn active">SEMUA</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">ASIN</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">MANIS</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">PEDAS</button>
+          </li>
+        </ul>
+
+        <p class="section-text">DAFTAR MAKANAN</p>
+
+        <ul class="food-menu-list">
+          <li>
+            <div class="food-menu-card">
+              <div class="card-banner">
+                <img
+                  src="./assets/images/food-menu-1.png"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  alt="Brabuk"
+                  class="w-100"
+                />
+              </div>
+
+              <div class="wrapper">
+                <p class="category">Asin</p>
+                <p class="daerah">Purwodadi</p>
+              </div>
+
+              <h3 class="h3 card-title">Brabuk</h3>
+
+              <div class="price-wrapper">
+                <p class="price-text">Price:</p>
+                <data class="price">$49.00</data>
+              </div>
+
+              <div class="wrapper">
+                <p class="deskripsi-singkat">makanan ini adalah bla bla</p>
+              </div>
+              <div class="wrapper">
+                <a href="../deskripsi/deskripsi.php" class="btn-text hover-underline label-2"
+                  >Selengkapnya</a
+                >
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="food-menu-card">
+              <div class="card-banner">
+                <img
+                  src="./assets/images/food-menu-1.png"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  alt="Brabuk"
+                  class="w-100"
+                />
+              </div>
+
+              <div class="wrapper">
+                <p class="category">Asin</p>
+                <p class="daerah">Purwodadi</p>
+              </div>
+
+              <h3 class="h3 card-title">Brabuk</h3>
+
+              <div class="price-wrapper">
+                <p class="price-text">Price:</p>
+                <data class="price">$49.00</data>
+              </div>
+
+              <div class="wrapper">
+                <p class="deskripsi-singkat">makanan ini adalah bla bla</p>
+              </div>
+              <div class="wrapper">
+                <a href="..deskripsi/deskripsi.php" class="btn-text hover-underline label-2"
+                  >Selengkapnya</a
+                >
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="food-menu-card">
+              <div class="card-banner">
+                <img
+                  src="./assets/images/food-menu-1.png"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  alt="Brabuk"
+                  class="w-100"
+                />
+              </div>
+
+              <div class="wrapper">
+                <p class="category">Manis</p>
+                <p class="daerah">Jogja</p>
+              </div>
+
+              <h3 class="h3 card-title">Gudeg</h3>
+
+              <div class="price-wrapper">
+                <p class="price-text">Price:</p>
+                <data class="price">$49.00</data>
+              </div>
+
+              <div class="wrapper">
+                <p class="deskripsi-singkat">makanan ini adalah bla bla</p>
+              </div>
+              <div class="wrapper">
+                <a href="#deskripsi" class="btn-text hover-underline label-2"
+                  >Selengkapnya</a
+                >
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- link js -->
+    <script src="script.js"></script>
+  </body>
+</html>

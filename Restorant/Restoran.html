@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="Style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header" data-header>
+      <div class="container">
+        <a href="#" class="logo">
+          <img
+            src="logo.png"
+            width="160"
+            height="50"
+            alt="Saloka - Kuliner Nusantara"
+          />
+        </a>
+
+        <nav class="navbar" data-navbar>
+          <button class="close-btn" aria-label="close menu" data-nav-taggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <a href="#" class="logo">
+            <img
+              src="logo.png"
+              width="160"
+              height="50"
+              alt="Saloka - Kuliner Nusantara"
+            />
+          </a>
+
+          <!-- bikin navigasi bar atas -->
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="../home/home.html" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Home</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\Makanan\Makanan.php"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Food</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="../Restoran/Restoran.html"
+                class="navbar-link hover-underline active"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Resto</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#festival" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Festival</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#about" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">About us</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a href="#profile" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Account</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- membuat button pemesanan meja -->
+        <a href="#table" class="btn btn-secondary">
+          <span class="text text-1">Find A Table</span>
+
+          <span class="text text-2" aria-hidden="true">Find A Table</span>
+        </a>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+        <div class="overlay" data-nav-toggler data-overlay></div>
+      </div>
+    </header>
+
+    <section class="section section-divider white blog" id="blog">
+      <div class="container">
+        <p class="section-subtitle">CULTURE</p>
+
+        <h2 class="h2 section-title">
+          Rekomendasi <span class="span">Restoran</span> untuk
+          <span class="span">Anda</span>
+        </h2>
+
+        <p class="section-text">
+          mencari restoran sesuai dengan pilihan dan mood anda? Ini solusinya!
+        </p>
+
+        <ul class="fiter-list">
+          <li>
+            <button class="filter-btn active">SEMUA</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">JOGJA</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">JEPARA</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">PURWODADI</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">PAPUA/TIMIKA</button>
+          </li>
+
+          <li>
+            <button class="filter-btn">SUKABUMI</button>
+          </li>
+        </ul>
+
+        <ul class="blog-list">
+          <li>
+            <div class="blog-card">
+              <div class="card-banner">
+                <img
+                  src="https://i.pinimg.com/736x/83/20/71/8320717b9146e4a9815405f0f1f73eb8.jpg"
+                  width="600"
+                  height="390"
+                  loading="lazy"
+                  alt="What Do You Think About Cheese Pizza Recipes?"
+                  class="w-100"
+                />
+
+                <div class="badge">Gudeg</div>
+              </div>
+
+              <div class="card-content">
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Rating</p>
+                    <p class="span">4.5</p>
+                  </a>
+
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Owner</p>
+                    <p class="span">Radyan</p>
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://maps.app.goo.gl/vo19h13jC7Xj2J8G7"
+                    class="card-meta-link"
+                  >
+                    <p class="meta-info">Maps</p>
+                    <p class="span">klik.</p>
+                  </a>
+                </div>
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="span">Jogja</p>
+                  </a>
+                </div>
+
+                <h3 class="h3">
+                  <a href="#" class="card-title">Gudeg Yudjum</a>
+                </h3>
+
+                <p class="card-text">
+                  Berdiri sejak tahun 1950, Gudeg Yu Djum telah menjadi ikon
+                  kuliner khas Daerah Istimewa Yogyakarta / Jogja. Rasa khas
+                  gudegnya berasal dari bahan-bahan pilihan dan bermutu yang
+                  telah melalui proses masak secara tradisional berdasarkan
+                  resep asli yang dipertahankan hingga saat ini.
+                </p>
+
+                <a href="#" class="btn-text hover-underline label-2">
+                  <span>More Information</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="blog-card">
+              <div class="card-banner">
+                <img
+                  src="./assets/images/blog-1.jpg"
+                  width="600"
+                  height="390"
+                  loading="lazy"
+                  alt="What Do You Think About Cheese Pizza Recipes?"
+                  class="w-100"
+                />
+
+                <div class="badge">brabuk</div>
+              </div>
+
+              <div class="card-content">
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Rating</p>
+                    <p class="span">4.2</p>
+                  </a>
+
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Owner</p>
+                    <p class="span">Tony</p>
+                  </a>
+                </div>
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="span">Purwodadi</p>
+                  </a>
+                </div>
+
+                <h3 class="h3">
+                  <a href="#" class="card-title">Pedesan bebek Re Resto</a>
+                </h3>
+
+                <p class="card-text">
+                  Nasi jagung (nasek empog, nasi ampok, nasi empok, ba'alo
+                  binte) adalah suatu makanan khas Indonesia yang terbuat dari
+                  jagung sebagai bahan dasarnya.
+                </p>
+
+                <a href="#" class="btn-text hover-underline label-2">
+                  <span>More Information</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="blog-card">
+              <div class="card-banner">
+                <img
+                  src="./assets/images/blog-1.jpg"
+                  width="600"
+                  height="390"
+                  loading="lazy"
+                  alt="What Do You Think About Cheese Pizza Recipes?"
+                  class="w-100"
+                />
+
+                <div class="badge">Gudeg</div>
+              </div>
+
+              <div class="card-content">
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Rating</p>
+                    <p class="span">4.5</p>
+                  </a>
+
+                  <a href="#" class="card-meta-link">
+                    <p class="meta-info">Owner</p>
+                    <p class="span">Radyan</p>
+                  </a>
+                </div>
+                <div class="card-meta-wrapper">
+                  <a href="#" class="card-meta-link">
+                    <p class="span">Jogja</p>
+                  </a>
+                </div>
+
+                <h3 class="h3">
+                  <a href="#" class="card-title">Gudeg Yudjum</a>
+                </h3>
+
+                <p class="card-text">
+                  Berdiri sejak tahun 1950, Gudeg Yu Djum telah menjadi ikon
+                  kuliner khas Daerah Istimewa Yogyakarta / Jogja. Rasa khas
+                  gudegnya berasal dari bahan-bahan pilihan dan bermutu yang
+                  telah melalui proses masak secara tradisional berdasarkan
+                  resep asli yang dipertahankan hingga saat ini.
+                </p>
+
+                <a href="#" class="btn-text hover-underline label-2">
+                  <span>More Information</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- link js -->
+    <script src="script.js"></script>
+  </body>
+</html>

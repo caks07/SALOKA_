@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 98vw;
+  height: 45vw;
+  background-position: center;
+  background-size: cover;
+  padding: 0 8%;
+  position: relative;
+  background-image: url(Durian.jpg);
+}
+
+.h1 {
+  color: #ffffff;
+  padding-top: 150px;
+  font-size: 64px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.h1 span {
+  color: yellow;
+}
+
+.p1 {
+  color: #ffffff;
+  font-size: 16px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.p1 span {
+  color: yellow;
+}
+.content {
+  padding-top: 300px;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #ffffff;
+}
+.content h1 {
+  font-size: 64px;
+  font-weight: 500;
+}
+.content button {
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  padding: 12px 25px;
+  color: #ffffff;
+}
+
+.launch-time {
+  display: flex;
+  color: rgb(255, 255, 255);
+}
+.launch-time div {
+  flex-basis: 100px;
+}
+.launch-time div p {
+  font-size: 60px;
+  margin-bottom: -14px;
+}
+
+.container2 {
+  margin-top: 50px;
+  width: 98vw;
+  height: 45vw;
+  background-position: center;
+  background-size: cover;
+  padding: 0 8%;
+  position: relative;
+  background-image: url(tumpeng.jpg);
+}
+
+.h2 {
+  color: #ffffff;
+  padding-top: 150px;
+  font-size: 64px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.h2 span {
+  color: rgb(77, 255, 0);
+}
+
+.p2 {
+  color: #ffffff;
+  font-size: 16px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.p2 span {
+  color: rgb(77, 255, 0);
+}
+.content2 {
+  padding-top: 300px;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #ffffff;
+}
+.content h2 {
+  font-size: 64px;
+  font-weight: 500;
+}
+.content button {
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  padding: 12px 25px;
+  color: #ffffff;
+}
+
+.launch-time2 {
+  display: flex;
+  color: rgb(255, 255, 255);
+}
+.launch-time2 div {
+  flex-basis: 100px;
+}
+.launch-time2 div p {
+  font-size: 60px;
+  margin-bottom: -14px;
+}
+
+.container3 {
+  margin-top: 50px;
+  width: 98vw;
+  height: 45vw;
+  background-position: center;
+  background-size: cover;
+  padding: 0 8%;
+  position: relative;
+  background-image: url(jajananlokal.jpg);
+}
+
+.h3 {
+  color: #ffffff;
+  padding-top: 150px;
+  font-size: 64px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.h3 span {
+  color: rgb(0, 170, 255);
+}
+
+.p3 {
+  color: #ffffff;
+  font-size: 16px;
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+}
+.p3 span {
+  color: rgb(0, 170, 255);
+}
+.content3 {
+  padding-top: 300px;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #ffffff;
+}
+.content h3 {
+  font-size: 64px;
+  font-weight: 500;
+}
+.content button {
+  background: transparent;
+  border: 2px solid #ffffff;
+  outline: none;
+  padding: 12px 25px;
+  color: #ffffff;
+}
+
+.launch-time3 {
+  display: flex;
+  color: rgb(255, 255, 255);
+}
+.launch-time3 div {
+  flex-basis: 100px;
+}
+.launch-time3 div p {
+  font-size: 60px;
+  margin-bottom: -14px;
+}
+
+/* Untuk layar dengan lebar maksimum 768px */
+@media (max-width: 768px) {
+  .container,
+  .container2,
+  .container3 {
+    height: 90vw; /* Mengubah tinggi kontainer pada layar kecil */
+  }
+
+  .h1,
+  .h2,
+  .h3 {
+    font-size: 40px; /* Mengubah ukuran font judul pada layar kecil */
+    padding-top: 80px; /* Menyesuaikan padding atas judul */
+  }
+
+  .p1,
+  .p2,
+  .p3 {
+    font-size: 14px; /* Mengubah ukuran font paragraf pada layar kecil */
+  }
+
+  .content,
+  .content2,
+  .content3 {
+    padding-top: 150px; /* Menyesuaikan padding atas konten */
+  }
+
+  .content h1,
+  .content2 h2,
+  .content3 h3 {
+    font-size: 40px; /* Mengubah ukuran font konten pada layar kecil */
+  }
+
+  .launch-time div p,
+  .launch-time2 div p,
+  .launch-time3 div p {
+    font-size: 40px; /* Mengubah ukuran font waktu peluncuran pada layar kecil */
+  }
+}
+
+/* Untuk layar dengan lebar maksimum 480px */
+@media (max-width: 480px) {
+  .container,
+  .container2,
+  .container3 {
+    height: 140vw; /* Mengubah tinggi kontainer pada layar sangat kecil */
+  }
+
+  .h1,
+  .h2,
+  .h3 {
+    font-size: 32px; /* Mengubah ukuran font judul pada layar sangat kecil */
+    padding-top: 60px; /* Menyesuaikan padding atas judul */
+  }
+
+  .p1,
+  .p2,
+  .p3 {
+    font-size: 12px; /* Mengubah ukuran font paragraf pada layar sangat kecil */
+  }
+
+  .content,
+  .content2,
+  .content3 {
+    padding-top: 120px; /* Menyesuaikan padding atas konten */
+  }
+
+  .content h1,
+  .content2 h2,
+  .content3 h3 {
+    font-size: 32px; /* Mengubah ukuran font konten pada layar sangat kecil */
+  }
+
+  .launch-time div p,
+  .launch-time2 div p,
+  .launch-time3 div p {
+    font-size: 32px; /* Mengubah ukuran font waktu peluncuran pada layar sangat kecil */
+  }
+}
