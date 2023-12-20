@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&family=Nunito:wght@200;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+:root{
+    --main-color: #3867d6;
+}
+
+*{
+    font-family: 'Nunito', sans-serif;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 7rem;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar{
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-track{
+    background: #444;
+}
+
+html::-webkit-scrollbar-thumb{
+    background: var(--main-color);
+    border-radius: 5rem;
+}
+
+body{
+    background-color: #222;
+}
+
+section{
+    padding: 2rem 9%;
+}
+
+.deskripsi-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 70%;
+    margin: 0 auto;
+    color: white;
+}
+
+.deskripsi-container p {
+    position: absolute;
+    bottom: 0;
+    margin-top: 10;
+    color: white;
+    font-size: 25px;
+    padding-top: 20px;
+    margin-left: 450px;
+    margin-bottom: -75px;
+}
+
+.deskripsi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 70%;
+    color: white;
+}
+
+.deskripsi img {
+    max-width: 45%;
+    height: auto;
+    margin-bottom: 1rem;
+    margin-left: 450px;
+    color: white;
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    background: #666;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn::hover {
+    background:var(--main-color);
+}
+
+.header{
+
+    position: fixed;
+    top:0; left:0; right: 0;
+    z-index: 10000;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 9%;
+
+}
+
+.header .logo{
+    font-weight: bolder ;
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.header .logo span{
+    color: var(--main-color);
+}
+
+.header .navbar a{
+    font-size: 1.7rem;
+    color: #fff;
+    margin-left: 2rem;
+}
+
+.header .navbar a:hover{
+    color: var(--main-color);
+}
+
+#menu-bars{
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+.home .content{
+    text-align: center;
+    padding-top: 6rem;
+    margin: 2rem auto;
+    max-width: 70rem;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    max-width: 40%;
+}
+
+.swiper-slide img {
+    max-width: 15%;
+    height: auto;
+}
+
+.slide-text {
+    margin-left: 20px; /* Atur jarak antara teks dan gambar */
+    color: white;
+    font-size: 25px;
+}
+
+.slide-text .deskripsi{
+    margin-left: 20px; /* Atur jarak antara teks dan gambar */
+    color: white;
+    font-size: 15px;
+}
+.swiper-slide-active .slide-text {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.swiper-slide-next .slide-text, .swiper-slide-prev .slide-text {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+
+.home .content h3 {
+    color: #fff;
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.home .content h3 span {
+    color: rgb(255, 213, 0);
+    font-size: 4.5rem;
+    text-transform: uppercase;
+}
+
+
+.home .content {
+    text-align: center;
+    padding-top: 6rem;
+    margin: 0 auto; 
+    max-width: 70rem;
+}
+
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+
+    .header{
+        padding:1.5rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .slide-text {
+        margin-left: 10px;
+        font-size: 24px;
+    }
+
+    .swiper-slide {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section {
+        padding: 2rem 5%;
+    }
+
+    .home .content {
+        padding-top: 3rem;
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    .home .content h3 {
+        font-size: 3.5rem;
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header .logo {
+        font-size: 2rem;
+    }
+
+    #menu-bars {
+        display: initial;
+    }
+
+    .header .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        background: #333;
+        border-top: 0.1rem solid #222;
+    }
+
+    .header .navbar a {
+        display: block;
+        padding: 1.5rem;
+        margin: 0.5rem;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .home .content h3 {
+        font-size: 3rem;
+    }
+}

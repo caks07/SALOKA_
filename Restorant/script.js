@@ -1,18 +1,3 @@
-// Mengambil semua elemen tombol 'filter-btn'
-const filterButtons = document.querySelectorAll(".filter-btn");
-
-// Menambahkan event listener ke setiap tombol 'filter-btn'
-filterButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    // Menghapus kelas 'active' dari semua tombol 'filter-btn'
-    filterButtons.forEach((btn) => btn.classList.remove("active"));
-
-    // Menambahkan kelas 'active' hanya pada tombol yang diklik
-    button.classList.add("active");
-  });
-});
-
-
 // /*NAVBAR*/
 /*buat iniin apa list navbar ketutup sama muncul*/
 const addEventOnElements = function (elements, eventType, callback) {
@@ -66,4 +51,39 @@ window.addEventListener("scroll", function () {
     header.classList.remove("active");
     backTopBtn.classList.remove("active");
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Ambil elemen-elemen yang diperlukan dari DOM
+  const selectWilayah = document.getElementById("selectWilayah");
+  const applyFilterBtn = document.getElementById("applyFilterBtn");
+  const restoranList = document.getElementById("restoranList");
+
+  // Fungsi untuk mendapatkan data makanan dengan filter dari PHP
+  const getFilterRestoran = function () {
+    // Dapatkan nilai filter wilayah dan rasa
+    const selectedWilayah = selectWilayah.value;
+
+    // Kirim request dengan filter menggunakan fetch API
+    fetch("Restoran.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        wilayah: selectedWilayah,
+      }).toString(),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Update bagian yang menampilkan card makanan dengan data baru
+        restoranList.innerHTML = data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // Tambahkan event listener untuk tombol terapkan filter
+  applyFilterBtn.addEventListener("click", getFilterRestoran);
 });

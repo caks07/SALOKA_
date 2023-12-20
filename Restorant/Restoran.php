@@ -6,10 +6,11 @@
     <link href="Style.css" rel="stylesheet" />
 </head>
 <body>
-<!-- HEADER -->
-<header class="header" data-header>
+
+    <!-- HEADER -->
+    <header class="header" data-header>
       <div class="container">
-        <a href="#" class="logo">
+        <a href="..\home\home.php" class="logo">
           <img
             src="logo.png"
             width="160"
@@ -23,7 +24,7 @@
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
           </button>
 
-          <a href="#" class="logo">
+          <a href="..\home\home.php" class="logo">
             <img
               src="logo.png"
               width="160"
@@ -35,7 +36,10 @@
           <!-- bikin navigasi bar atas -->
           <ul class="navbar-list">
             <li class="navbar-item">
-              <a href="..\home\home.php" class="navbar-link hover-underline">
+              <a
+                href="..\home\home.php"
+                class="navbar-link hover-underline"
+              >
                 <div class="separator"></div>
 
                 <span class="span">Home</span>
@@ -55,7 +59,7 @@
 
             <li class="navbar-item">
               <a
-                href="../Restoran/Restoran.html"
+                href="..\Restorant\Restoran.php"
                 class="navbar-link hover-underline active"
               >
                 <div class="separator"></div>
@@ -65,7 +69,10 @@
             </li>
 
             <li class="navbar-item">
-              <a href="..\Festival makanan\Fest.html" class="navbar-link hover-underline">
+              <a
+                href="..\Festival\Festival.php"
+                class="navbar-link hover-underline"
+              >
                 <div class="separator"></div>
 
                 <span class="span">Festival</span>
@@ -73,7 +80,10 @@
             </li>
 
             <li class="navbar-item">
-              <a href="..\AboutUs\AboutUs.html" class="navbar-link hover-underline">
+              <a
+                href="..\AboutUs\AboutUs.html"
+                class="navbar-link hover-underline"
+              >
                 <div class="separator"></div>
 
                 <span class="span">About us</span>
@@ -81,7 +91,7 @@
             </li>
 
             <li class="navbar-item">
-              <a href="..\Profile Template\index.html" class="navbar-link hover-underline">
+              <a href="..\ProfileUser\profile.php" class="navbar-link hover-underline">
                 <div class="separator"></div>
 
                 <span class="span">Account</span>
@@ -90,11 +100,11 @@
           </ul>
         </nav>
 
-        <!-- membuat button pemesanan meja -->
-        <a href="#table" class="btn btn-secondary">
-          <span class="text text-1">Logout</span>
+        <!-- logout-->
+        <a href="..\index.html" class="btn btn-secondary">
+          <span class="text text-1">Log out</span>
 
-          <span class="text text-2" aria-hidden="true">Logout</span>
+          <span class="text text-2" aria-hidden="true">Log out</span>
         </a>
         <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
           <span class="line line-1"></span>
@@ -117,30 +127,29 @@
             mencari restoran sesuai dengan pilihan dan mood anda? Ini solusinya!
         </p>
 
-         <ul class="fiter-list">
-          <li>
-            <button class="filter-btn active">SEMUA</button>
-          </li>
-
-          <li>
-            <button class="filter-btn">JOGJA</button>
-          </li>
-
-          <li>
-            <button class="filter-btn">JEPARA</button>
-          </li>
-
-          <li>
-            <button class="filter-btn">PURWODADI</button>
-          </li>
-
-          <li>
-            <button class="filter-btn">PAPUA/TIMIKA</button>
-          </li>
-
-          <li>
-            <button class="filter-btn">SUKABUMI</button>
-          </li>
+        <form id="filterForm" method="post" action="Restoran.php"> 
+          <div>
+        <ul class="fiter-list">
+        <p class="section-subtitle">DAERAH</p>
+          <select id="selectWilayah" name="wilayah" class="input-field">
+            <option value="semuaWilayah">SEMUA</option>
+            <option value="bandung">BANDUNG</option>
+            <option value="jogja">JOGJA</option>
+            <option value="jepara">JEPARA</option>
+            <option value="jakarta">JAKARTA</option>
+            <option value="samarinda">SAMARINDA</option>
+            <option value="semarang">SEMARANG</option>
+            <option value="sukabumi">SUKABUMI</option>
+            <option value="solo">SOLO</option>
+          </select>
+        </ul>
+        </div>
+        <ul class="fiter-list">
+        <button type="submit" class="btn btn-secondary" id="applyFilterBtn">
+          <span class="text text-1">Terapkan</span>
+          <span class="text text-2" aria-hidden="true">Terapkan</span>
+        </button>
+        </form>
         </ul>
 
         <ul class="blog-list">
@@ -160,7 +169,16 @@
             }
 
             // Query untuk mengambil data restoran dari tabel
-            $sql = "SELECT * FROM restoran";
+            // Query untuk mengambil data makanan dari tabel        
+        $sql = "SELECT * FROM restoran WHERE 1=1";;
+
+
+        // Cek apakah filter wilayah dipilih
+        if (isset($_POST['wilayah']) && $_POST['wilayah'] !== 'semuaWilayah') {
+          $wilayah = $_POST['wilayah'];
+          $sql .= " AND Wilayah = '$wilayah'";
+        }
+  // Jika tidak ada data yang difilter, maka query akan menampilkan semua data
             $result = $conn->query($sql);
 
             
@@ -205,7 +223,7 @@
       echo '</li>';
     }
   } else {
-    echo '<li><p>Tidak ada data restoran.</p></li>';
+    echo '<li><p>Maaf restoran belum terdaftar.</p></li>';
   }
   ?>
 </ul>

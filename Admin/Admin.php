@@ -1,3 +1,4 @@
+
 <!--Website: wwww.codingdung.com-->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,9 @@
 </head>
 
 <body>
-    <div class="container light-style flex-grow-1 container-p-y">
+<div class="container light-style flex-grow-1 container-p-y">
+    <div class="text-left mt-3">
+    <a href="..\LoginAdmin\index.html" class="btn btn-primary">Kembali</a>
         <h4 class="font-weight-bold py-3 mb-4">
             Admin
         </h4>
@@ -22,13 +25,11 @@
                         <a class="list-group-item list-group-item-action active" data-toggle="list"
                             href="#account-general">Profile</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-change-password">Restorant</a>
+                            href="#restoran">Restorant</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-info">Makanan</a>
+                            href="#makanan">Makanan</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-notifications">Pemesanan</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-notifications">Data pengguna</a>
+                            href="#festival">Festival</a>
                             </div>
                 </div>
                 <div class="col-md-9">
@@ -55,7 +56,7 @@
                             </div>
                         </div>
                         
-                        <?php
+<?php
 // Koneksi ke database
 $servername = "localhost";
 $username = "root";
@@ -68,7 +69,8 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+//tambah data
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitRestoran'])) {
     $namaRestoran = $_POST['namaRestoran'];
     $owner = $_POST['owner'];
     $rating = $_POST['rating'];
@@ -91,25 +93,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     
 }
 
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
-    $idToDelete = $_GET['hapus'];
-
-    // Query untuk menghapus data dari tabel restoran berdasarkan ID
-    $deleteSql = "DELETE FROM restoran WHERE ID_Restoran = $idToDelete";
-
-    if ($conn->query($deleteSql) === TRUE) {
-        echo "Data berhasil dihapus.";
-    } else {
-        echo "Error: " . $deleteSql . "<br>" . $conn->error;
-    }
-}
 // Proses Update Data
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-    if (isset($_GET['edit'])) {
-        $editID = $_GET['edit'];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateRestoran'])) {
+    if (isset($_GET['editRestoran'])) {
+        $editRestoran = $_GET['editRestoran'];
         $namaRestoran = $_POST['namaRestoran'];
         $owner = $_POST['owner'];
         $rating = $_POST['rating'];
@@ -120,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $gambar = $_POST['gambar'];
 
         // Lakukan proses update data
-        $updateSql = "UPDATE restoran SET Nama_Restoran='$namaRestoran', Owner='$owner', Rating_Restoran='$rating', Deskripsi='$deskripsi', Makanan_Terkenal='$terlaris', Wilayah='$lokasi', Maps='$maps', Gambar_Restoran='$gambar' WHERE ID_Restoran=$editID";
+        $updateSql = "UPDATE restoran SET Nama_Restoran='$namaRestoran', Owner='$owner', Rating_Restoran='$rating', Deskripsi='$deskripsi', Makanan_Terkenal='$terlaris', Wilayah='$lokasi', Maps='$maps', Gambar_Restoran='$gambar' WHERE ID_Restoran=$editRestoran";
 
         if ($conn->query($updateSql) === TRUE) {
             echo "Data berhasil diupdate.";
@@ -132,12 +119,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     }
 }
 
+//hapus data restoran
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapusRestoran'])) {
+    $idToDelete = $_GET['hapusRestoran'];
+    
+    // Hapus terlebih dahulu data dari tabel 'pemesanan' yang terkait
+    $deletePemesananSql = "DELETE FROM pemesanan WHERE ID_Restoran = $idToDelete";
+    
+    if ($conn->query($deletePemesananSql) === TRUE) {
+        // Jika penghapusan dari tabel 'pemesanan' berhasil, lanjutkan menghapus dari tabel 'restoran'
+        $deleteRestoranSql = "DELETE FROM restoran WHERE ID_Restoran = $idToDelete";
+        
+        if ($conn->query($deleteRestoranSql) === TRUE) {
+            echo "Data restoran berhasil dihapus.";
+        } else {
+            echo "Error menghapus data restoran: " . $conn->error;
+        }
+    } else {
+        echo "Error menghapus data pemesanan: " . $conn->error;
+    }
+}
+
 ?>
 
 <!-- Formulir -->
-<div class="tab-pane fade" id="account-change-password">
+<div class="tab-pane fade" id="restoran">
     <div class="card-body pb-2">
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . (isset($_GET['edit']) ? '?edit=' . $_GET['edit'] : ''); ?>">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . (isset($_GET['editRestoran']) ? '?editRestoran=' . $_GET['editRestoran'] : '')); ?>">
             <div class="form-group">
                 <label class="form-label">Nama Restorant</label>
                 <input type="text" class="form-control" name="namaRestoran">
@@ -174,12 +182,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
             <!-- Formulir lainnya untuk input yang lain -->
 
             <div class="form-group">
-    <button type="submit" class="btn btn-outline-primary" name="<?php echo isset($_GET['edit']) ? 'update' : 'submit'; ?>">
-        <?php echo isset($_GET['edit']) ? 'Update' : 'Tambah'; ?>
+    <button type="submit" class="btn btn-outline-primary" name="<?php echo isset($_GET['editRestoran']) ? 'updateRestoran' : 'submitRestoran'; ?>">
+        <?php echo isset($_GET['editRestoran']) ? 'Update' : 'Tambah'; ?> Restoran
     </button>
     <?php
     // Tampilkan tombol tambah jika tidak dalam mode edit
-    if (isset($_GET['edit'])) {
+    if (isset($_GET['editRestoran'])) {
         echo '<a href="Admin.php" class="btn btn-outline-secondary">Kembali</a>';
     }
     ?>
@@ -223,8 +231,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                             echo "<td>" . $row['Maps'] . "</td>";
                             echo "<td>" . $row['Gambar_Restoran'] . "</td>";
                             // Tambahkan baris lain sesuai dengan kolom tabel
-                            echo "<td><a href='?edit=" . $row['ID_Restoran'] . "'>EDIT</a></td>";
-                            echo "<td><a href='?hapus=" . $row['ID_Restoran'] . "'>HAPUS</a></td>";
+                            echo "<td><a href='?editRestoran=" . $row['ID_Restoran'] . "'>EDIT</a></td>";
+                            echo "<td><a href='?hapusRestoran=" . $row['ID_Restoran'] . "'>HAPUS</a></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -238,7 +246,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
 </div>
 
 <!--   -->
-<div class="tab-pane fade" id="account-change-password">
+<?php
+$servername = "localhost";
+$username = "root";
+$password = ""; // Ganti sesuai dengan password database Anda
+$dbname = "saloka";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+//tambah makanan
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitMakanan'])) {
+    $namaMakanan = $_POST['namaMakanan'];
+    $lokasi = $_POST['lokasi'];
+    $deskripsiSingkat = $_POST['deskripsiSingkat'];
+    $deskripsiPanjang = $_POST['deskripsiPanjang'];
+    $kisaranHarga = $_POST['kisaranHarga'];
+    $gambar = $_POST['gambar'];
+    $kategoriRasa = $_POST['kategoriRasa'];
+
+    $sql = "INSERT INTO makanan (Nama_Makanan, Wilayah, Deskripsi_Singkat, Deskripsi_Panjang, Kisaran_Harga, Gambar_Makanan, Kategori_Rasa)
+    VALUES ('$namaMakanan', '$lokasi', '$deskripsiSingkat', '$deskripsiPanjang', '$kisaranHarga', '$gambar', '$kategoriRasa')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data berhasil ditambahkan.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    
+}
+
+//hapus data makanan
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapusMakanan'])) {
+    $idToDelete = $_GET['hapusMakanan'];
+
+    $deleteSql = "DELETE FROM makanan WHERE ID_Makanan = $idToDelete";
+
+    if ($conn->query($deleteSql) === TRUE) {
+        echo "Data makanan berhasil dihapus.";
+    } else {
+        echo "Error menghapus data makanan: " . $conn->error;
+    }
+}
+
+// Proses Update Data
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateMakanan'])) {
+    if (isset($_GET['editMakanan'])) {
+        $editMakanan = $_GET['editMakanan'];
+        $namaMakanan = $_POST['namaMakanan'];
+        $lokasi = $_POST['lokasi'];
+        $deskripsiSingkat = $_POST['deskripsiSingkat'];
+        $deskripsiPanjang = $_POST['deskripsiPanjang'];
+        $kisaranHarga = $_POST['kisaranHarga'];
+        $gambar = $_POST['gambar'];
+        $kategoriRasa = $_POST['kategoriRasa'];
+
+        // Lakukan proses update data
+        $updateSql = "UPDATE makanan SET Nama_Makanan='$namaMakanan', Wilayah='$lokasi', Deskripsi_Singkat='$deskripsiSingkat', Deskripsi_Panjang='$deskripsiPanjang', Kisaran_Harga='$kisaranHarga', Gambar_Makanan='$gambar', Kategori_Rasas='$kategoriRasa' WHERE ID_Makanan=$editMakanan";
+
+        if ($conn->query($updateSql) === TRUE) {
+            echo "Data berhasil diupdate.";
+        } else {
+            echo "Error: " . $updateSql . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Edit ID tidak ditemukan.";
+    }
+}
+
+?>
+<div class="tab-pane fade" id="makanan">
     <div class="card-body pb-2">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . (isset($_GET['editMakanan']) ? '?editMakanan=' . $_GET['editMakanan'] : ''); ?>">
             <div class="form-group">
@@ -264,18 +345,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Gambar</label>
-                                    <input type="text" class="form-control" name="lokasi">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Maps</label>
-                                    <input type="text" class="form-control" name="maps">
+                                    <input type="text" class="form-control" name="gambar">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Kategori Rasa</label>
-                                    <select class="custom-select">
-                                        <option>Pedas</option>
-                                        <option selected>Asin</option>
+                                    <select class="custom-select" name="kategoriRasa">
+                                        <option>Asin</option>
                                         <option>Manis</option>
+                                        <option>Pedas</option>
                                     </select>
                                     </div>
             <!-- Formulir lainnya untuk input yang lain -->
@@ -305,7 +382,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                 <th class="d-block d-md-table-cell">Rasa</th>
                 <th class="d-block d-md-table-cell">Kisaran Harga</th>
                 <th class="d-block d-md-table-cell">Gambar</th>
-
+                <th class="d-block d-md-table-cell">Edit</th>
+                <th class="d-block d-md-table-cell">Hapus</th>
             </tr>
         </thead>
                 <tbody>
@@ -319,6 +397,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                             echo "<tr>";
                             echo "<td>" . $row['ID_Makanan'] . "</td>";
                             echo "<td>" . $row['Nama_Makanan'] . "</td>";
+                            echo "<td>" . $row['Deskripsi_Singkat'] . "</td>";
+                            echo "<td>" . $row['Deskripsi_Panjang'] . "</td>";
+                            echo "<td>" . $row['Wilayah'] . "</td>";
+                            echo "<td>" . $row['Kategori_Rasa'] . "</td>";
+                            echo "<td>" . $row['Kisaran_Harga'] . "</td>";
+                            echo "<td>" . $row['Gambar_Makanan'] . "</td>";
                             // Tambahkan baris lain sesuai dengan kolom tabel
                             echo "<td><a href='?editMakanan=" . $row['ID_Makanan'] . "'>EDIT</a></td>";
                             echo "<td><a href='?hapusMakanan=" . $row['ID_Makanan'] . "'>HAPUS</a></td>";
@@ -329,10 +413,181 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                     }
                     ?>
                 </tbody>
-            </table>
+                </table>
+                </div>
+                            
+                            
+                                
+                        </div>
+                    </div>
+                    <?php
+$servername = "localhost";
+$username = "root";
+$password = ""; // Ganti sesuai dengan password database Anda
+$dbname = "saloka";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+//tambah festival
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitFestival'])) {
+    $namaFestival = $_POST['namaFestival'];
+    $deskripsiFestival = $_POST['deskripsiFestival'];
+    $tanggalFestival = $_POST['tanggalFestival'];
+    $gambarFestival = $_POST['gambarFestival'];
+    $tiketFestival = $_POST['tiketFestival'];
+    $lokasiFestival = $_POST['lokasiFestival'];
+
+    $sql = "INSERT INTO festival (nama_festival, deskripsi, tanggal_input, gambar, tiket, lokasi_festival)
+    VALUES ('$namaFestival', '$deskripsiFestival', '$tanggalFestival', '$gambarFestival', '$tiketFestival', '$lokasiFestival')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data festival berhasil ditambahkan.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    
+}
+
+//hapus data festival
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapusFestival'])) {
+    $idToDelete = $_GET['hapusFestival'];
+
+    $deleteSql = "DELETE FROM festival WHERE id = $idToDelete";
+
+    if ($conn->query($deleteSql) === TRUE) {
+        echo "Data festival berhasil dihapus.";
+    } else {
+        echo "Error menghapus data festival: " . $conn->error;
+    }
+}
+
+
+
+// Proses Update Data
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateFestival'])) {
+    if (isset($_GET['editFestival'])) {
+        $editFestival = $_GET['editFestival'];
+        $namaFestival = $_POST['namaFestival'];
+        $deskripsiFestival = $_POST['deskripsiFestival'];
+        $tanggalFestival = $_POST['tanggalFestival'];
+        $gambarFestival = $_POST['gambarFestival'];
+        $tiketFestival = $_POST['tiketFestival'];
+        $lokasiFestival = $_POST['lokasiFestival'];
+
+        // Lakukan proses update data
+        $updateSql = "UPDATE festival SET nama_festival='$namaFestival', deskripsi='$deskripsiFestival', tanggal_input='$tanggalFestival', gambar='$gambarFestival', tiket='$tiketFestival', lokasi_festival='$lokasiFestival' WHERE id=$editFestival";
+
+        if ($conn->query($updateSql) === TRUE) {
+            echo "Data festival berhasil diupdate.";
+        } else {
+            echo "Error: " . $updateSql . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Edit ID tidak ditemukan.";
+    }
+}
+
+?>
+<div class="tab-pane fade" id="festival">
+    <div class="card-body pb-2">
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . (isset($_GET['editFestival']) ? '?editFestival=' . $_GET['editFestival'] : ''); ?>">
+            <div class="form-group">
+                <label class="form-label">Nama Festival</label>
+                <input type="text" class="form-control" name="namaFestival">
+            </div>
+            <div class="form-group">
+                                    <label class="form-label">Deskripsi</label>
+                                    <input type="text" class="form-control" name="deskripsiFestival">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tanggal</label>
+                                    <input type="date" class="form-control" name="tanggalFestival">
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Gambar</label>
+                                    <input type="text" class="form-control" name="gambarFestival">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Link Tiket</label>
+                                    <input type="text" class="form-control" name="tiketFestival">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lokasi</label>
+                                    <input type="text" class="form-control" name="lokasiFestival">
+                                </div>
+            <!-- Formulir lainnya untuk input yang lain -->
+
+            <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary" name="<?php echo isset($_GET['editFestival']) ? 'updateFestival' : 'submitFestival'; ?>">
+                    <?php echo isset($_GET['editFestival']) ? 'Update' : 'Tambah'; ?>
+                </button>
+                <?php
+                // Tampilkan tombol Kembali jika dalam mode edit
+                if (isset($_GET['editFestival'])) {
+                    echo '<a href="Admin.php" class="btn btn-outline-secondary">Kembali</a>';
+                }
+                ?>
+</div></form>
+
+        <!-- Tampilan data -->
+        <div class="form-group table-responsive" >
+            <table class="table">
+            <thead>
+            <tr>
+                <th class="d-block d-md-table-cell">ID</th>
+                <th class="d-block d-md-table-cell">Nama</th>
+                <th class="d-block d-md-table-cell">Deskripsi</th>
+                <th class="d-block d-md-table-cell">Tanggal</th>
+                <th class="d-block d-md-table-cell">Gambar</th>
+                <th class="d-block d-md-table-cell">Tiket</th>
+                <th class="d-block d-md-table-cell">Lokasi</th>
+                <th class="d-block d-md-table-cell">Edit</th>
+                <th class="d-block d-md-table-cell">Hapus</th>
+            </tr>
+        </thead>
+                <tbody>
+                <?php
+                    // Ambil data dari tabel makanan
+                    $sql = "SELECT * FROM festival";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['nama_festival'] . "</td>";
+                            echo "<td>" . $row['deskripsi'] . "</td>";
+                            echo "<td>" . $row['tanggal_input'] . "</td>";
+                            echo "<td>" . $row['gambar'] . "</td>";
+                            echo "<td>" . $row['tiket'] . "</td>";
+                            echo "<td>" . $row['lokasi_festival'] . "</td>";
+                            // Tambahkan baris lain sesuai dengan kolom tabel
+                            echo "<td><a href='?editFestival=" . $row['id'] . "'>EDIT</a></td>";
+                            echo "<td><a href='?hapusFestival=" . $row['id'] . "'>HAPUS</a></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='4'>Tidak ada data</td></tr>";
+                    }
+                    ?>
+                </tbody>
+                </table>
+                </div>
+                            
+                            
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

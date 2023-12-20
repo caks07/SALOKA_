@@ -131,30 +131,50 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("reservationForm")
     .addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault(); // Mencegah pengiriman formulir
 
-      var form = event.target;
-      var formData = new FormData(form);
+      var name = document.getElementsByName("name")[0].value;
+      var phone = document.getElementsByName("phone")[0].value;
+      var resto = document.getElementsByName("resto")[0].value;
+      var orang = document.getElementsByName("orang")[0].value;
+      var reservationDate =
+        document.getElementsByName("reservation-date")[0].value;
+      var person = document.getElementsByName("person")[0].value;
+      var pesan = document.getElementsByName("pesan")[0].value;
 
-      fetch("process_form.php", {
-        method: "POST",
-        body: formData,
-      })
-        .then(function (response) {
-          if (response.ok) {
-            return response.json(); // Parse response JSON
-          } else {
-            throw new Error("Network response was not ok.");
-          }
+      if (
+        name === "" ||
+        phone === "" ||
+        resto === "" ||
+        orang === "" ||
+        reservationDate === "" ||
+        person === "" ||
+        pesan === ""
+      ) {
+        alert("Harap lengkapi semua bidang sebelum mengirimkan formulir.");
+      } else {
+        var formData = new FormData(this); // Mengambil data formulir
+
+        fetch("process_form.php", {
+          method: "POST",
+          body: formData,
         })
-        .then(function (data) {
-          // Handle the response data here
-          document.getElementById("statusMessage").innerText = data.message;
-          // Optionally, reset the form after successful submission
-          form.reset();
-        })
-        .catch(function (error) {
-          console.error("Error:", error);
-        });
+          .then(function (response) {
+            if (response.ok) {
+              return response.json(); // Parse response JSON
+            } else {
+              throw new Error("Network response was not ok.");
+            }
+          })
+          .then(function (data) {
+            // Handle the response data here
+            document.getElementById("statusMessage").innerText = data.message;
+            // Optionally, reset the form after successful submission
+            document.getElementById("reservationForm").reset();
+          })
+          .catch(function (error) {
+            console.error("Error:", error);
+          });
+      }
     });
 });

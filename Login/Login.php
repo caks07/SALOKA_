@@ -14,32 +14,36 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
+session_start(); 
+
+
 // Fungsi untuk login
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginSubmit'])) {
-    $usernameOrEmail = $_POST['usernameOrEmail'];
-    $password = $_POST['password'];
+  $usernameOrEmail = $_POST['usernameOrEmail'];
+  $password = $_POST['password'];
 
-    // Melakukan verifikasi login dengan prepared statement
-    $stmt = $conn->prepare("SELECT ID_Pengguna, Nama, Password FROM pengguna WHERE (Nama = ? OR Email = ?) LIMIT 1");
-    $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
+  // Melakukan verifikasi login dengan prepared statement
+  $stmt = $conn->prepare("SELECT ID_Pengguna, Nama, Password FROM pengguna WHERE (Nama = ? OR Email = ?) LIMIT 1");
+  $stmt->bind_param("ss", $usernameOrEmail, $usernameOrEmail);
+  $stmt->execute();
+  $result = $stmt->get_result();
 
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['Password'])) {
-            $_SESSION['loggedin'] = true;
-            $_SESSION['ID_Pengguna'] = $row['ID_Pengguna'];
-            $_SESSION['username'] = $row['Nama'];
-
-            header("Location: ../home/home.php");
-            
-        } else {
-            $loginError = "Username/Email atau Password salah.";
-        }
-    } else {
-        $loginError = "Username/Email atau Password salah.";
+  if ($result->num_rows == 1) {
+      $row = $result->fetch_assoc();
+      if (password_verify($password, $row['Password'])) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['ID_Pengguna'] = $row['ID_Pengguna'];
+        $_SESSION['username'] = $row['Nama'];
+    
+        header("Location: ../home/home.php");
+        exit();
     }
+     else {
+          $loginError = "Username/Email atau Password salah.";
+      }
+  } else {
+      $loginError = "Username/Email atau Password salah.";
+  }
 }
 
 // Fungsi untuk registrasi
@@ -57,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registerSubmit'])) {
     $stmt->bind_param("ssss", $username, $phone, $email, $hashed_password);
 
     if ($stmt->execute()) {
-        header("Location: ../home/home.php");
+        header("Location: ../Login/Login.php");
         exit();
     } else {
         $registerError = "Registrasi gagal. Silakan coba lagi.";
@@ -82,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registerSubmit'])) {
 <div class="wrapper">
       <nav class="nav">
         <div class="nav-logo">
-          <p>SALOKA</p>
+          <a href="..\index.html"><p>SALOKA</p></a>
         </div>
         <div class="nav-button">
           <button class="btn white-btn" id="loginBtn" onclick="login()">
@@ -127,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registerSubmit'])) {
         <label for="login-check"> Remember Me</label>
       </div>
       <div class="two">
-        <label><a href="..\Admin\Admin.php">Admin?</a></label>
+        <label><a href="..\Admin\Admin.php">Forget Password?</a></label>
       </div>
     </div>
   </form>
@@ -145,11 +149,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registerSubmit'])) {
       <i class="bx bx-user"></i>
     </div>
     <div class="input-box">
-      <input type="text" class="input-field" placeholder="Email" name="registerEmail" />
+      <input type="email" class="input-field" placeholder="Email" name="registerEmail" />
       <i class="bx bx-envelope"></i>
     </div>
     <div class="input-box">
-      <input type="text" class="input-field" placeholder="No Telephone" name="registerPhone" />
+      <input type="number" class="input-field" placeholder="No Telephone" name="registerPhone" />
       <i class="bx bx-envelope"></i>
     </div>
     <div class="input-box">

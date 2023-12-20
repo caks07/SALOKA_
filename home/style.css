@@ -1331,7 +1331,7 @@ section {
 }
 
 .form-right .separator {
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 .form-right .body-4 {
@@ -1341,11 +1341,6 @@ section {
 
 .form-right .body-4:not(:last-child) {
   margin-block-end: 25px;
-}
-
-.form-left,
-.form-right {
-  padding: 40px 20px 30px;
 }
 
 .input-field[type="date"] {
@@ -1364,14 +1359,15 @@ textarea.input-field {
   line-height: var(--lineHeight-1);
 }
 
-.form-left .btn {
-  max-width: 100%;
-  width: 100%;
-}
-
 .form-right {
   background-repeat: repeat;
-  background-position: top left;
+  justify-content: center;
+  padding: 40px;
+}
+
+.table {
+  border: #4e5155;
+  border-color: #4e5155;
 }
 
 /*FOOTER*/

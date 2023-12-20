@@ -6,14 +6,124 @@
     <link href="Style.css" rel="stylesheet" />
   </head>
   <body>
+    <!-- HEADER -->
+    <header class="header" data-header>
+      <div class="container">
+        <a href="..\home\home.php" class="logo">
+          <img
+            src="logo.png"
+            width="160"
+            height="50"
+            alt="Saloka - Kuliner Nusantara"
+          />
+        </a>
+
+        <nav class="navbar" data-navbar>
+          <button class="close-btn" aria-label="close menu" data-nav-taggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <a href="..\home\home.php" class="logo">
+            <img
+              src="logo.png"
+              width="160"
+              height="50"
+              alt="Saloka - Kuliner Nusantara"
+            />
+          </a>
+
+          <!-- bikin navigasi bar atas -->
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="..\home\home.php" class="navbar-link hover-underline">
+                <div class="separator"></div>
+
+                <span class="span">Home</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\Makanan\Makanan.php"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Food</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\Restorant\Restoran.php"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Resto</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\Festival\Festival.php"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Festival</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\AboutUs\AboutUs.html"
+                class="navbar-link hover-underline active"
+              >
+                <div class="separator"></div>
+
+                <span class="span">About us</span>
+              </a>
+            </li>
+
+            <li class="navbar-item">
+              <a
+                href="..\ProfileUser\profile.php"
+                class="navbar-link hover-underline"
+              >
+                <div class="separator"></div>
+
+                <span class="span">Account</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- logout-->
+        <a href="..\index.html" class="btn btn-secondary">
+          <span class="text text-1">Log out</span>
+
+          <span class="text text-2" aria-hidden="true">Log out</span>
+        </a>
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+        <div class="overlay" data-nav-toggler data-overlay></div>
+      </div>
+    </header>
+
     <section class="section section-divider white testi">
       <div class="container">
         <h2 class="h2 section-title">ABOUT <span class="span">US</span></h2>
 
         <p class="section-text">
-          SALOKA adalah Aplikasi berbasis Web yang menyediakan informasi tentang
-          makanan khas suatu daerah dan juga menyediakan informasi restoran mana
-          yang menjualnya
+          SALOKA Adalah Aplikasi berbasis Web yang menyediakan informasi tentang
+          makanan khas <br />
+          suatu daerah dan juga menyediakan informasi restoran mana yang
+          menjualnya
         </p>
 
         <ul class="testi-list has-scrollbar">
@@ -22,7 +132,7 @@
               <div class="profile-wrapper">
                 <figure class="avatar">
                   <img
-                    src="./assets/images/avatar-1.jpg"
+                    src="https://i.pinimg.com/736x/64/fa/95/64fa95aca67f04a7941d924a6e84cbb4.jpg"
                     width="80"
                     height="80"
                     loading="lazy"
@@ -31,7 +141,7 @@
                 </figure>
 
                 <div>
-                  <h3 class="h4 testi-name">Muhammad Arga Wicaksana</h3>
+                  <h3 class="h4 testi-name">Muhammad Hidayat Arga Wicaksana</h3>
 
                   <p class="testi-title">CEO and PM SALOKA</p>
                 </div>
@@ -57,7 +167,7 @@
               <div class="profile-wrapper">
                 <figure class="avatar">
                   <img
-                    src="./assets/images/avatar-2.jpg"
+                    src="https://i.pinimg.com/736x/03/b4/b6/03b4b62445a8143deb39f10209e8516b.jpg"
                     width="80"
                     height="80"
                     loading="lazy"
@@ -75,14 +185,6 @@
               <blockquote class="testi-text">
                 "Please help me,i am under the water blu blu blu blup."
               </blockquote>
-
-              <div class="rating-wrapper">
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </div>
             </div>
           </li>
 
@@ -91,7 +193,7 @@
               <div class="profile-wrapper">
                 <figure class="avatar">
                   <img
-                    src="./assets/images/avatar-3.jpg"
+                    src="https://i.pinimg.com/736x/55/9e/8e/559e8ef1facaba5f9f5a48d08ecc2024.jpg"
                     width="80"
                     height="80"
                     loading="lazy"
@@ -111,14 +213,6 @@
                 menang,jadi jawa adalah kunci,lihatlah PRRSEMESTA dia tidak
                 menguasai jawa dia kalah"
               </blockquote>
-
-              <div class="rating-wrapper">
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </div>
             </div>
           </li>
 
@@ -127,7 +221,7 @@
               <div class="profile-wrapper">
                 <figure class="avatar">
                   <img
-                    src="./assets/images/avatar-2.jpg"
+                    src="https://i.pinimg.com/736x/86/f5/dc/86f5dcaaa360f41d9cfdcd8f962cf8bb.jpg"
                     width="80"
                     height="80"
                     loading="lazy"
@@ -145,19 +239,10 @@
               <blockquote class="testi-text">
                 "Lu punya duit lu punya kuasa,tapi menurut gwa nggak gitu"
               </blockquote>
-
-              <div class="rating-wrapper">
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </div>
             </div>
           </li>
         </ul>
       </div>
     </section>
-    <script src="script.js"></script>
   </body>
 </html>

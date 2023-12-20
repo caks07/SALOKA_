@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatiblle" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Festival</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+
+       <header class="header">
+
+       </header> 
+<div class="container">
+       <section class="home" id="deskripsiRestoran">
+        <div class="content">
+            <h3>Deskripsi <span>Restoran</span></h3>
+        </div>
+
+        <!-- Deskripsi Restoran -->
+        
+            <div class="deskripsi-container">
+                <img src="https://i.pinimg.com/564x/6a/b8/6f/6ab86fdaf1f95704946425789f924697.jpg">
+                <div class="deskripsi">
+                <p>Restoran ini adalah bla bla bla bla Asik Asik Joss</p>
+            </div>
+        </div></div>
+    </section>
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Berikut <span>Review</span> Restorant</h3>
+            </div>
+
+            
+            <div class="swiper-container mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide-text">
+                            <h4>Nama Pengguna 1</h4>
+                            <div class="deskripsi">
+                                <p>Masakan di restorant ini mengingatkan saya pada masa kanak kanak</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-text">
+                            <h4>Pengguna 2</h4>
+                            <div class="deskripsi">
+                                <p>Masakan di restorant ini mengingatkan saya pada masa kanak kanak</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-text">
+                            <h4>Pengguna 3</h4>
+                            <div class="deskripsi">
+                                <p>Masakan di restorant ini mengingatkan saya pada masa kanak kanak</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="container">
+                <div class="form reservation-form bg-black-10">
+                <form action="" method="post" class="form-right" id="reservationForm">
+    
+                    <div class="input-wrapper">
+                        <textarea
+                  name="pesan"
+                  placeholder="Catatan"
+                  autocomplete="off"
+                  class="input-field"
+                ></textarea>
+
+                <button type="submit" class="btn btn-secondary" id="submitButton">
+    <span class="text text-1">Book A Table</span>
+    <span class="text text-2" aria-hidden="true">Book A Table</span>
+  </button>
+
+      </form>
+    </section>
+
+
+       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+       <script src="FestivalScript.js"></script>
+    </body>
+</html>

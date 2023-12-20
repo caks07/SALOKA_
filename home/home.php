@@ -1,11 +1,32 @@
 <?php
+include 'config.php';
+// Memulai session
+session_start();
 
+// Periksa apakah pengguna sudah login atau tidak
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // Jika belum login, redirect ke halaman login atau tindakan lain
+    header("Location: ../Login/Login.php");
+    exit;
+}
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "saloka"; // Ganti $database_name menjadi $database
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Ambil ID pengguna yang sudah login dari session
+    $user_id = $_SESSION['ID_Pengguna'];
 
+    // Query untuk mengambil data pemesanan pengguna yang sudah login
+    $query = "SELECT p.ID_Pemesanan, p.Nama_Pelanggan, p.Nomor_Telepon, r.Nama_Restoran, p.Jumlah_Orang, p.Tanggal, p.Jam, p.Catatan
+                FROM pemesanan p
+                INNER JOIN restoran r ON p.ID_Restoran = r.ID_Restoran
+                WHERE p.ID_Pengguna = $user_id";
+
+    $result = mysqli_query($conn, $query);
+
+    if (!$result) {
+        // Handle kesalahan query
+        die("Query error: " . mysqli_error($conn));
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +53,9 @@ $database = "saloka"; // Ganti $database_name menjadi $database
     <link rel="stylesheet" href="style.css" />
 
     <!-- gambar preload -->
-    <link rel="preload" as="image" href="home-bg-1.jpeg" />
-    <link rel="preload" as="image" href="home-bg-2.jpeg" />
-    <link rel="preload" as="image" href="home-bg-3.jpeg" />
+    <link rel="preload" as="image" href="https://i.pinimg.com/736x/7d/40/5b/7d405b3f26be93af85a63eb8e367e30f.jpg" />
+    <link rel="preload" as="image" href="https://i.pinimg.com/736x/c6/66/af/c666af20e3baa75ad4e4ddcc4fe85030.jpg" />
+    <link rel="preload" as="image" href="https://i.pinimg.com/736x/ae/64/3b/ae643bd17a0654aaece198c8d9894cf9.jpg" />
   </head>
   <body>
     <!-- PRELOAD -->
@@ -46,7 +67,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
     <!-- HEADER -->
     <header class="header" data-header>
       <div class="container">
-        <a href="#" class="logo">
+        <a href="..\home\home.php" class="logo">
           <img
             src="logo.png"
             width="160"
@@ -60,7 +81,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
           </button>
 
-          <a href="#" class="logo">
+          <a href="..\home\home.php" class="logo">
             <img
               src="logo.png"
               width="160"
@@ -73,7 +94,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           <ul class="navbar-list">
             <li class="navbar-item">
               <a
-                href="../home/home.html"
+                href="..\home\home.php"
                 class="navbar-link hover-underline active"
               >
                 <div class="separator"></div>
@@ -106,7 +127,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
 
             <li class="navbar-item">
               <a
-                href="../Festival makanan/Fest.html"
+                href="..\Festival\Festival.php"
                 class="navbar-link hover-underline"
               >
                 <div class="separator"></div>
@@ -117,7 +138,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
 
             <li class="navbar-item">
               <a
-                href="../AboutUs/AboutUs.html"
+                href="..\AboutUs\AboutUs.html"
                 class="navbar-link hover-underline"
               >
                 <div class="separator"></div>
@@ -127,7 +148,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
             </li>
 
             <li class="navbar-item">
-              <a href="#profile" class="navbar-link hover-underline">
+              <a href="..\ProfileUser\profile.php" class="navbar-link hover-underline">
                 <div class="separator"></div>
 
                 <span class="span">Account</span>
@@ -136,8 +157,8 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           </ul>
         </nav>
 
-        <!-- membuat button pemesanan meja -->
-        <a href="..\home\home.html" class="btn btn-secondary">
+        <!-- logout-->
+        <a href="..\index.html" class="btn btn-secondary">
           <span class="text text-1">Log out</span>
 
           <span class="text text-2" aria-hidden="true">Log out</span>
@@ -160,7 +181,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
             <li class="slider-item active" data-hero-slider-item>
               <div class="slider-bg">
                 <img
-                  src="home-bg-1.jpeg"
+                  src="https://i.pinimg.com/736x/7d/40/5b/7d405b3f26be93af85a63eb8e367e30f.jpg"
                   width="1880"
                   height="950"
                   alt=""
@@ -183,7 +204,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
             <li class="slider-item" data-hero-slider-item>
               <div class="slider-bg">
                 <img
-                  src="home-bg-2.jpeg"
+                  src="https://i.pinimg.com/736x/c6/66/af/c666af20e3baa75ad4e4ddcc4fe85030.jpg"
                   width="1880"
                   height="950"
                   alt=""
@@ -204,7 +225,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
             <li class="slider-item" data-hero-slider-item>
               <div class="slider-bg">
                 <img
-                  src="home-bg-3.jpeg"
+                  src="https://i.pinimg.com/736x/ae/64/3b/ae643bd17a0654aaece198c8d9894cf9.jpg"
                   width="1880"
                   height="950"
                   alt=""
@@ -248,7 +269,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           <div class="container">
             <p class="section-subtitle label-2">Cita Rasa Lokal</p>
 
-            <h2 class="headline-1 section-title">Kategori Menu</h2>
+            <h2 class="headline-1 section-title">Let's Try <span>Gaskan!!</span></h2>
 
             <p class="section-text">
               Berikut adalah karegori menu kami silahkan dipilih untuk
@@ -264,7 +285,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                       style="--width: 285; --height: 336"
                     >
                       <img
-                        src="menu-1.jpg"
+                        src="https://i.pinimg.com/736x/3d/44/ca/3d44ca0b0b30fa53c903521f424aede0.jpg"
                         width="285"
                         height="336"
                         loading="lazy"
@@ -279,7 +300,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                       <a href="#">ASIN</a>
                     </h3>
 
-                    <a href="#..\Makanan\Makanan.php" class="btn-text hover-underline label-2"
+                    <a href="..\Makanan\Makanan.php" class="btn-text hover-underline label-2"
                       >Selengkapnya</a
                     >
                   </div>
@@ -309,7 +330,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                       <a href="#">MANIS</a>
                     </h3>
 
-                    <a href="#food" class="btn-text hover-underline label-2"
+                    <a href="..\Makanan\Makanan.php" class="btn-text hover-underline label-2"
                       >Selengkapnya</a
                     >
                   </div>
@@ -354,7 +375,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           <div class="container">
             <div class="card-content">
               <h3 class="title-4 card-title judul">
-                <a href="#">Rekomendasi Kuliner Bulan Ini</a>
+                <a href="#">Must Try!! <br> Top Kuliner Indonesia Bulan Ini!</a>
               </h3>
             </div>
             <ul class="promo-list has-scrollbar">
@@ -367,7 +388,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                   </p>
 
                   <img
-                    src="populer-1.jpg"
+                    src="https://i.pinimg.com/736x/51/6e/52/516e527f04c4451a9d9fa1dc50736990.jpg"
                     width="300"
                     height="300"
                     loading="lazy"
@@ -390,7 +411,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                   </p>
 
                   <img
-                    src="populer-2.jpeg"
+                    src="https://i.pinimg.com/736x/40/b1/7d/40b17d281830cf2f172479e40f438a24.jpg"
                     width="300"
                     height="300"
                     loading="lazy"
@@ -412,7 +433,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                   </p>
 
                   <img
-                    src="populer-3.jpeg"
+                    src="https://i.pinimg.com/736x/78/9a/51/789a513fca2341d85319f2f71386e043.jpg"
                     width="300"
                     height="300"
                     loading="lazy"
@@ -434,7 +455,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                   </p>
 
                   <img
-                    src="populer-4.jpeg"
+                    src="https://i.pinimg.com/736x/81/43/09/81430917b2d8c6ca0bc0bfc0f27e9524.jpg"
                     width="300"
                     height="300"
                     loading="lazy"
@@ -457,7 +478,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                   </p>
 
                   <img
-                    src="populer-5.jpeg"
+                    src="https://i.pinimg.com/736x/62/08/95/62089564a562c34043ae60c56ee51e54.jpg"
                     width="300"
                     height="300"
                     loading="lazy"
@@ -476,7 +497,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           <div class="container">
             <p class="section-subtitle label-2 text-center">Seru seruan yuk</p>
 
-            <h2 class="section-title headline-1 text-center">Upcoming Event</h2>
+            <h2 class="section-title headline-1 text-center">Upcoming Event!<br> Festival Kuliner</h2>
 
             <ul class="grid-list">
               <li>
@@ -486,7 +507,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     style="--width: 350; --height: 450"
                   >
                     <img
-                      src="event-1.jpeg"
+                      src="https://i.pinimg.com/736x/f8/a0/f4/f8a0f45b6449859e7d28045906f8edad.jpg"
                       width="350"
                       height="450"
                       loading="lazy"
@@ -495,7 +516,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     />
 
                     <time class="publish-date label-2" datetime="2023-12-15"
-                      >15/12/2023</time
+                      >25/12/2023</time
                     >
                   </div>
 
@@ -516,7 +537,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     style="--width: 350; --height: 450"
                   >
                     <img
-                      src="event-2.jpeg"
+                      src="https://i.pinimg.com/736x/dd/f7/7f/ddf77f83cea300ecde3ebdeb10a07bd6.jpg"
                       width="350"
                       height="450"
                       loading="lazy"
@@ -525,7 +546,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     />
 
                     <time class="publish-date label-2" datetime="2023-11-31"
-                      >31/11/2023</time
+                      >31/12/2023</time
                     >
                   </div>
 
@@ -546,7 +567,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     style="--width: 350; --height: 450"
                   >
                     <img
-                      src="event-3.jpg"
+                      src="https://i.pinimg.com/736x/c2/1c/d3/c21cd317eaaa84c95cf5151c82289dcb.jpg"
                       width="350"
                       height="450"
                       loading="lazy"
@@ -555,7 +576,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
                     />
 
                     <time class="publish-date label-2" datetime="2024-01-01"
-                      >01/01/2024</time
+                      >11/01/2024</time
                     >
                   </div>
 
@@ -570,7 +591,7 @@ $database = "saloka"; // Ganti $database_name menjadi $database
               </li>
             </ul>
 
-            <a href="..\Festival makanan\Fest.html" class="btn btn-primary">
+            <a href="..\Festival\Festival.php" class="btn btn-primary">
               <span class="text text-1">Selengkapnya</span>
 
               <span class="text text-2" aria-hidden="true">Selengkapnya</span>
@@ -691,46 +712,53 @@ $database = "saloka"; // Ganti $database_name menjadi $database
           
         </section>
 
-        <section class="reservation">
-          <div class="container">
-          <div class="form reservation-form bg-black-10">
-          <div class="container light-style flex-grow-1 container-p-y">
-          <div class="tab-pane fade" id="account-notifications">
-                                <div class="card-body pb-2">
-                                    <div class="form-group">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    
-                                                    <th>Nama</th>
-                                                    <th>No telp</th>
-                                                    <th>Nama Resto</th>
-                                                    <th>Jumlah orang</th>
-                                                    <th>Tanggal</th>
-                                                    <th>Jam</th>
-                                                    <th>Waktu</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Data 1</td>
-                                                    <td>Data 2</td>
-                                                    <td>Data 3</td>
-                                                    <td>Data 4</td>
-                                                    <td>Data 5</td>
-                                                    <td>Data 6</td>
-                                                    <td>Data 7</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-</div>
-</div>
-</section>
 
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
+    <!-- Jika pengguna sudah login, tampilkan data pemesanan -->
+    <section class="reservation">
+        <div class="container">
+            <div class="form reservation-form bg-black-10">
+                <div class="container light-style flex-grow-1 container-p-y">
+                    <div class="tab-pane fade" id="account-notifications">
+                        <div class="card-body pb-2">
+                            <div class="form-group">
+                            <h4 class="title-4 text-center">Data Pemesanan</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>No telp</th>
+                                            <th>Nama Resto</th>
+                                            <th>Jumlah orang</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam</th>
+                                            <th>Catatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['Nama_Pelanggan'] . "</td>";
+                                            echo "<td>" . $row['Nomor_Telepon'] . "</td>";
+                                            echo "<td>" . $row['Nama_Restoran'] . "</td>";
+                                            echo "<td>" . $row['Jumlah_Orang'] . "</td>";
+                                            echo "<td>" . $row['Tanggal'] . "</td>";
+                                            echo "<td>" . $row['Jam'] . "</td>";
+                                            echo "<td>" . $row['Catatan'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
 
         <!-- Back To Top Button-->
         <a
@@ -754,10 +782,12 @@ $database = "saloka"; // Ganti $database_name menjadi $database
               <a href="" class="logo">Saloka.</a>
 
               <p class="footer-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                saepe recusandae obcaecati, in ab voluptatem quos magnam ad
-                temporibus sunt delectus ex accusantium corrupti. Ab voluptatum
-                eaque rerum vero quidem?
+              Aplikasi ini bertujuan untuk mempromosikan dan mengenalkan
+                pengalaman kuliner lokal yang unik di suatu daerah. Aplikasi
+                'Sajian Lokal' akan memberikan platform bagi pengguna untuk
+                menemukan, menikmati, dan memahami hidangan dan cita rasa lokal.
+                Ini menawarkan berbagai fitur untuk membantu wisatawan
+                menemukan, menikmati, dan menghargai budaya makanan lokal.
               </p>
 
               <ul class="social-list">
@@ -793,16 +823,16 @@ $database = "saloka"; // Ganti $database_name menjadi $database
               </li>
 
               <li>
-                <p class="footer-list-item">+1 (062) 109-9222</p>
+                <p class="footer-list-item">+62 85864225219</p>
               </li>
 
               <li>
-                <p class="footer-list-item">Info@YourGmail24.com</p>
+                <p class="footer-list-item">Saloka@students.uii.ac.id</p>
               </li>
 
               <li>
                 <address class="footer-list-item">
-                  153 Williamson Plaza, Maggieberg, MT 09514
+                Gang Mawar, Ngemplak, KAB. SLEMAN, NGEMPLAK, DI YOGYAKARTA, ID 55584
                 </address>
               </li>
             </ul>
@@ -814,8 +844,8 @@ $database = "saloka"; // Ganti $database_name menjadi $database
         <div class="footer-bottom">
           <div class="container">
             <p class="copyright-text">
-              &copy; 2022
-              <a href="#" class="copyright-link">codewithsadee</a> All Rights
+              &copy; 2023
+              <a href="#" class="copyright-link">Saloka.com</a> All Rights
               Reserved.
             </p>
           </div>
